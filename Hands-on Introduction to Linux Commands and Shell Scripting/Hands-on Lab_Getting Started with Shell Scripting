@@ -1,0 +1,97 @@
+
+
+
+
+==============================Hands-on Lab: Common Linux/Unix Commands
+
+Objectives
+After completing this lab you will be able to:
+
+Create and execute a simple bash shell script.
+Implement the 'shabang' directive in a bash shell script.
+
+--------------------
+
+
+=====Exercise 1 - Create and execute a basic Shell Script
+
+
+1.1 Create a new script file
+
+--Step 1:  File->New File to create a new file.
+
+--Step 2: Give the name as 'greet.sh' and click 'OK'
+
+--Step 3: Copy and paste the following lines into the newly created file.
+
+# This script accepts the user's name and prints 
+# a message greeting the user
+
+# Print the prompt message on screen
+echo -n "Enter your name :"        
+
+# Wait for user to enter a name, and save the entered name into the variable 'name'
+read name                
+
+# Print the welcome message followed by the name    
+echo "Welcome $name"
+
+# The following message should print on a single line. Hence the usage of '-n'
+echo -n "Congratulations! You just created and ran your first shell script "
+echo "using Bash on IBM Skills Network"
+
+
+--Step 4: Save the file using the File->Save menu option
+
+
+1.2 Execute the script
+
+--Open a new terminal, 
+--Let us check the permissions for this new file:
+
+ls -l greet.sh
+
+--If the file exists and has read permission, run the following command to execute it.
+
+bash greet.sh
+
+
+=====Exercise 2 - Using 'Shabang' line
+
+In this exercise, we will edit the script 'greet.sh' created in the previous exercise and make it an executable file.
+
+
+2.1 : Find the path to the interpreter.
+
+--The which command helps you find out the path of the command 'bash'.
+
+which bash
+
+2.2 : Edit the script 'greet.sh' and add the shabang line to the script.
+
+--Open the file and add the following line at the beginning of the script:
+
+#! /bin/bash
+
+2.3 Check the permissions of the script.
+
+--Let us add the execute permission for the user on greet.sh.
+
+chmod +x greet.sh
+
+--To change permissions for greet.sh, run the command below:
+
+chmod u+x greet.sh
+
+--Verify the permissions using the command below.
+
+ls -l greet.sh
+
+2.4 Execute the script.
+
+--Run the command given below to execute the shell script.
+
+./greet.sh
+
+
+										The End - Jeremias Tivane [https://www.linkedin.com/in/jeremiastivane]

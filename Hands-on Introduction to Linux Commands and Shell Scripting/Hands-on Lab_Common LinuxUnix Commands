@@ -1,0 +1,534 @@
+
+
+
+
+==============================Hands-on Lab: Common Linux/Unix Commands
+
+Objectives
+In this lab, you will be introducted to the use basic Unix commands related to the following categories:
+
+General purpose commands.
+Directory management commands.
+File management commands.
+Access control commands.
+Text processing commands.
+Networking commands.
+
+--------------------
+
+
+=====Exercise 1 - General purpose commands
+
+1.1. Display the name of the current user
+
+whoami
+
+
+1.2. Know the user and group identity information
+
+id
+
+1.3. Display date and time
+
+date
+
+--The following command displays current date in mm/dd/yy format.
+
+date "+%D"
+
+Here are some of the popular format specifiers that you can try out.
+
+Specifier	Explaination
+%d			Display the day of the month (01 to 31)
+%h			Displays abbreviated month name (Jan to Dec)
+%m			Displays the month of year (01 to 12)
+%Y			Display four-digit year
+%T			Display the time in 24 hour format as HH:MM:SS
+%H			Display the hour
+
+1.4. List the files and directories
+
+ls
+
+--The following command will list all the files in the /bin directory.
+
+ls /bin
+
+--List all files starting with b in the /bin directory.
+
+ls /bin/b*
+
+--List all files ending with r in the /bin directory.
+
+ls /bin/*r
+
+1.5. Get basic information about the operating system
+
+uname
+
+--Using the -a opton prints all the system information in the following order: Kernel name, 
+network node hostname, kernel release date, kernel version, machine hardware name, hardware platform, operating system.
+
+uname -a
+
+1.6. Get information about active processes
+
+ps
+
+--The -e option displays all the processes running on the system. The includes processes owned by other users also.
+
+ps -e
+
+1.7. Get information on the running processes and system resources
+
+top
+
+--If you want to exit automatically after a specified number of repetitions, use the -n option as in the following example:
+
+top -n 10
+
+--using 'top' we can find out which process is consuming the most resources. You can press the following keys while 'top' is 
+--running to sort the list :
+
+M - sort by memory usage
+P - sort by CPU usage
+N - sort by process ID
+T - sort by the running time
+
+1.8. Display Messages
+echo command displays the given text on the screen.
+
+echo "Welcome to the linux lab"
+
+--These special characters help you better format your output.
+
+Special Character	Meaning
+\n					Represents a newline character
+\t					A tab character
+
+--Use the -e option of the echo command when working with special characters.
+
+echo -e "This will be printed \nin two lines"
+
+1.9. Download a file from the internet.
+
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/usdoi.txt
+
+--Verify using the ls command.
+
+ls
+
+
+1.10. View the Reference Manual
+
+man ls
+
+Full documentation at: <http://www.gnu.org/software/coreutils/ls>
+http://www.gnu.org/software/coreutils/ls
+
+
+
+=====Exercise 2 - Directory Management Commands
+
+2.1. Print the name of your current working directory.
+
+pwd
+
+2.2. Create a directory
+
+mkdir scripts 
+
+--Use the ls command to verify if the scripts directories got created.
+
+ls 
+
+2.3. Change your current working directory.
+
+cd scripts
+
+--Use the pwd command to verify if your current working directory has changed.
+
+pwd
+
+--If you use cd without any directory name, it will move you back to your home directory.
+
+cd
+
+--Use the pwd command to verify if your current working directory has changed.
+
+pwd
+
+--Run the command below to move to the parent directory. .. is a shortcut that refers to the parent directory of your current directory.
+
+cd ..
+
+2.4. Get a list of files in a directory
+
+ls  -l
+
+--Here are some popular options that you can try with the ls command.
+
+Option	Description
+-a		list all the files including hidden files
+-d		list directories themselves, not their contents
+-h		with -l and -s, print sizes like 1K, 234M, 2G etc
+-l		long listing of files which include information about permission, owner, size etc
+-F		classify files by appending type indcator like *,/ etc. to file names
+-r		reverse order while sorting
+-S		sort by file size, largest first
+-t		sort by time, newest first
+
+--Get a long listing of all files in /etc, including hidden files, if any.
+
+ls -la /etc
+
+--To list the files based on modifcation time, use -t option.
+--This is more frequently used with -l option.
+
+ls -lt
+
+--To view the current directory attributes instead of their contents, use the following command.
+--If you want any other directory's attributes, provide the directory name as argument.
+
+ls -ld /etc
+
+--To list the files sorted by file size in descending order, use -S option.
+
+ls -lS
+
+--To get the files sorted by file size in ascending order, add -r option.
+
+ls -lrS
+
+2.5. Delete directory
+
+--Let us create a dummy directory in the the /tmp folder .
+
+mkdir /tmp/dummy
+
+--Verify by using the ls command.
+
+ls /tmp
+
+--Delete the dummy directory
+
+rmdir /tmp/dummy
+
+--Verify by using the ls command.
+
+ls /tmp
+
+--Note: Before removing any directory make sure that you do not have any files or sub directories.
+
+
+2.6. Search and locate files
+
+--Find command is used to search for files in a directory. You can search for files based on different categories
+-- like file name, file type, owner, size, timestamps etc.
+
+find /etc -name '*.txt' 
+
+
+2.7. Display the amount of disk space available on file systems
+
+--The 'df' command displays the information of device name, total blocks, total disk space, used disk space, 
+-- available disk space and mount points on a file system.
+
+df
+
+--Use the -h option to view the disk space usage in human readable format, i.e, in megabytes, gigabytes etc.
+
+df -h
+
+
+=====Exercise 3 - File Management Commands
+
+3.1. Display file contents
+
+cat usdoi.txt
+
+--if you get a file not found error, then run these commands.
+
+--cd takes you to your home directory.
+
+--wget download the file.
+
+--cat will print the file onto the screen.
+
+cd
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/usdoi.txt
+cat usdoi.txt
+
+3.2. Display file contents page-wise
+
+--Press spacebar to display the next page.
+
+more usdoi.txt
+
+3.3. Display first few lines of a file
+
+head usdoi.txt
+
+--Print the first 3 lines of the file usdoi.txt.
+
+head -3 usdoi.txt
+
+3.4. Display last lines of a file
+
+tail usdoi.txt
+
+--Print the last 2 lines of the file usdoi.txt.
+
+tail -2 usdoi.txt
+
+3.5. Copy files
+
+cp usdoi.txt usdoi-backup.txt
+
+--Use ls command to verify if the copy was successful.
+
+ls
+
+--The command below copies the content of /etc/passwd to a file named 'users.txt' under the current directory.
+
+cp /etc/passwd users.txt
+
+--Use ls command to verify if the copy was successful.
+
+ls
+
+3.6. Move, Rename a file
+
+--Rename users.txt as user-info.txt
+
+mv users.txt user-info.txt
+
+--Use ls command to verify.
+
+ls
+
+--Move user-info.txt to the /tmp directory
+
+mv user-info.txt /tmp
+
+--Use ls command to verify.
+
+ls
+
+ls -l /tmp
+
+3.7. Create a blank file
+
+touch myfile.txt
+
+--Use ls command to verify.
+
+ls -l
+
+--If the file already exists, the touch command updates the access timestamp of the file.
+
+touch usdoi.txt
+
+--Use ls command to verify.
+
+ls -l
+
+
+3.8. Remove files
+
+--Remove the file myfile.txt.
+
+rm -i myfile.txt
+
+--Use ls command to verify.
+
+ls -l
+
+3.9. Create and manage file archives
+
+--The options used are as follows:
+
+Option	Description.
+-c		Create new archive file
+-v		Verbosely list files processed
+-f		Archive file name
+
+tar -cvf bin.tar /bin
+
+--To see the list of files in the archive, use -t option:
+
+tar -tvf bin.tar
+
+--To untar the archive or extract files from the archive, use -x option:
+
+tar -xvf bin.tar
+
+--Use ls command to verify that the folder bin is extracted.
+
+ls -l
+
+
+3.10. Package and compress archive files
+
+--The following command creates a zip named config.zip and of all the files with extension .conf in the /etc directory.
+
+zip config.zip /etc/*.conf
+
+
+--The following command creates an archive of the '/bin' directory.
+
+zip -r bin.zip /bin
+
+
+3.11. Extract, list, or test compressed files in a ZIP archive
+
+--The following command lists the files of the archive called 'config.zip'
+
+unzip -l config.zip
+
+--The following command extracts all the files in the archive bin.zip.
+
+unzip bin.zip
+
+--You should see a folder named bin created in your directory.
+
+
+Exercise 4 - Access Control Commands
+
+--Each file/directory has permissions set for the file owner, group owner and others.
+--The following permissions are set for each file:
+
+Permission	symbol
+read		r
+write		w
+execute		x
+--To see the permissions currently set for a file, run ls -l command.
+
+--For example, to see the permissions for a file named 'usdoi.txt' in your current directory, run:
+
+ls -l usdoi.txt
+
+--A sample output looks like: -rw-r--r-- 1 theia theia 8121 May 31 16:45 usdoi.txt
+
+
+4.1 chmod
+
+--The change of permissions is specified with the help of a combination of the following characters:
+
+Option		Description.
+r, w and x	representing read, write and execute permissions respectively
+u,g and o	representing user categories owner, group and others respectively
++, -		representing grant and revoke operations respectively
+
+--The command below removes read permission for all (user,group and other) on usdoi.txt.
+
+chmod -r usdoi.txt               
+
+--Verify the changed permissions.
+
+ls -l usdoi.txt
+
+--Add read access to all on usdoi.txt.
+
+chmod +r usdoi.txt                
+
+--Verify the changed permissions.
+
+ls -l usdoi.txt
+
+--To remove the read permission for 'others' category.
+
+chmod o-r usdoi.txt
+
+--Verify the changed permissions.
+
+ls -l usdoi.txt
+
+
+=====Exercise 5 - Text Processing Commands
+
+5.1. Count lines, words or characters
+
+wc usdoi.txt
+
+--Print only the number of lines in 'usdoi.txt'.
+
+wc -l usdoi.txt
+
+--Print only the number of words in 'usdoi.txt'.
+
+wc -w usdoi.txt
+
+--Print only the number of characters in 'usdoi.txt'.
+
+wc -c usdoi.txt
+
+5.2. Perform search operations within the text
+
+--grep command allows you to specify patterns and search for lines matching the pattern, from the input text.
+
+--The following command prints all lines in the file usdoi.txt which contain the word people.
+
+grep people usdoi.txt
+
+--Some of the frequently used options of grep are:
+
+Option	Description.
+-n		Along with the matching lines, print the line numbers also
+-c		Get the count of matching lines
+-i		Ignore the case of the text while matching
+-v		Print all lines which do not contain the pattern
+-w		Match only if the pattern matches whole words
+
+--Prints all lines from the /etc/passwd file, which do not contain the pattern login.
+
+grep -v login /etc/passwd
+
+
+=====Exercise 6 - Networking commands
+
+6.1. Show the system's host name
+
+hostname
+
+--You can use the -i option to view the IP adrress of the host:
+
+hostname -i
+
+
+6.2. Test if a host is reachable
+
+--Check if www.google.com is reachable. The command keeps sending data packets to the www.google.com 
+-- server and prints the response it gets back. (Press Ctrl+C to stop pinging)
+
+ping www.google.com
+
+--If you want to ping only for a limited number of times, use -c option.
+
+ping -c 5 www.google.com
+
+
+6.3. Display network interface configuration
+
+ifconfig
+
+--Display the configuration of the ethernet adapter.
+
+ifconfig eth0
+
+--eth0 is usually the primary network interface that connects your server to the network.
+
+
+6.4. Transfer data from or to a server
+
+--Access the file at the given url and display the contents on to the screen.
+
+curl https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/usdoi.txt
+
+--Access the file at the given url and save it in the current directory.
+
+curl -O https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/usdoi.txt
+
+
+
+										The End - Jeremias Tivane [https://www.linkedin.com/in/jeremiastivane]
